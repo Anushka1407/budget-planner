@@ -1,0 +1,18 @@
+<div>
+    @for (transaction of transactions; track transaction) {
+        <div class="row">
+            <div class="col"><input type="text" class="w-100"></div>
+            <div class="col"><input type="text" name="amount" id="" class="w-100"></div>
+        </div>
+    }
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-6">
+                <button class="btn btn-success w-100" (click)="addIncome()">Add Income</button>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-danger w-100">Add Expense</button>
+            </div>
+        </div>
+    </div>
+</div>
