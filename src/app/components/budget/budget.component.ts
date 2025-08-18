@@ -9,6 +9,8 @@ import { Transaction } from '../../models/transaction.model';
 })
 export class BudgetComponent {
   transactions: Transaction[] = [];
+  
+  // test changes
 
   public addIncome() {
     this.transactions.push({
