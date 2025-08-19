@@ -56,4 +56,10 @@ export class BudgetComponent {
       transaction.amount = value > 0 ? -value : value;
     }
   }
+
+  public preventInvalidKeys(event: KeyboardEvent) {
+    if (['e', 'E', '+', '-'].includes(event.key)) {
+      event.preventDefault();
+    }
+  }
 }
