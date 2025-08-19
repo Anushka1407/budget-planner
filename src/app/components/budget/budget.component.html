@@ -1,12 +1,17 @@
 <div>
     @for (transaction of transactions; track transaction) {
         <div class="transaction-container">
-            <div class="transaction-row ps-1" [ngClass]="transaction.type === 'income' ? 'row-green' : 'row-red'">
+            <div class="transaction-row ps-1">
                 <div class="w-50">
-                    <input type="text" class="w-100" [(ngModel)]="transaction.name">
+                    <input type="text" class="w-100" 
+                        [ngClass]="transaction.type === 'income' ? 'row-green' : 'row-red'" 
+                        [(ngModel)]="transaction.name">
                 </div>
                 <div class="w-50">
-                    <input type="text" name="amount" id="" class="w-100" [(ngModel)]="transaction.amount"
+                    <input type="text" class="w-100" 
+                        [ngClass]="transaction.type === 'income' ? 'row-green' : 'row-red'" 
+                        [(ngModel)]="transaction.amount"
+                        (ngModelChange)="onAmountChange($event, transaction)"
                         (input)="calculateTotal($event, transaction.id)">
                 </div>
                 <div class="total">
