@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Transaction } from '../../models/transaction.model';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-budget',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './budget.component.html',
   styleUrl: './budget.component.scss'
 })
@@ -34,10 +35,6 @@ export class BudgetComponent {
   public calculateTotal(e: Event, id: number) {
     const value = (e.target as HTMLInputElement).value.trim();
     if (value) {
-      // we have list of transactions
-      // we want to display total amount on each column
-      // we need to add or substract depending on type of transaction
-      // we want to display the total in the corner of the amount box 
       this.transactions.forEach(transaction => {
         // find index of current transaction
         const indexOfCurrentTransaction = this.transactions.indexOf(transaction)
@@ -48,8 +45,8 @@ export class BudgetComponent {
         } else {
           const previousTotal = this.transactions[indexOfCurrentTransaction - 1].total || 0;
           transaction.total = transaction.type === 'income' ?
-            previousTotal + transaction.amount :
-            previousTotal - transaction.amount
+            (Number(previousTotal) + Number(transaction.amount)) :
+            (previousTotal - transaction.amount)
         }
 
       });
