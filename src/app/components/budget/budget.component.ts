@@ -12,8 +12,6 @@ import { CommonModule } from '@angular/common';
 export class BudgetComponent {
   transactions: Transaction[] = [];
 
-  // test changes
-
   public addIncome() {
     this.transactions.push({
       id: this.transactions.length + 1,
@@ -41,16 +39,21 @@ export class BudgetComponent {
 
         // find previous transaction if current transaction is not first transaction
         if (indexOfCurrentTransaction === 0) {
-          transaction.total = transaction.type === 'income' ? transaction.amount : -(transaction.amount)
+          transaction.total = transaction.amount;
         } else {
           const previousTotal = this.transactions[indexOfCurrentTransaction - 1].total || 0;
-          transaction.total = transaction.type === 'income' ?
-            (Number(previousTotal) + Number(transaction.amount)) :
-            (previousTotal - transaction.amount)
+          transaction.total = Number(previousTotal) + Number(transaction.amount);
         }
 
       });
     }
   }
 
+  public onAmountChange(value: number, transaction: any) {
+    if (transaction.type === 'income') {
+      transaction.amount = value;
+    } else {
+      transaction.amount = value > 0 ? -value : value;
+    }
+  }
 }
